@@ -89,6 +89,7 @@ public class CollectManager : MonoBehaviour
                     obj = temp;
                 }
             }
+            decreaseMoney(this.gameObject.name);
             Destroy(this.gameObject);
         }
 
@@ -102,12 +103,12 @@ public class CollectManager : MonoBehaviour
         }
         else if(name.Contains("Gold"))
         {
-            manager.decreaseMoney(gold);
+            manager.decreaseMoney(gold+dolar);
 
         }
         else
         {
-            manager.decreaseMoney(diamond);
+            manager.decreaseMoney(diamond+gold+dolar);
         }
     }
 }
