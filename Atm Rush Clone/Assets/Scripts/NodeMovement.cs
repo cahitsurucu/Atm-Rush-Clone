@@ -8,6 +8,7 @@ public class NodeMovement : MonoBehaviour
 
     public Transform connectedNode;
     private List<GameObject> knife = new List<GameObject>();
+    private bool canMove = true;
 
     double size;
 
@@ -23,10 +24,15 @@ public class NodeMovement : MonoBehaviour
         }
     }
 
+    public void setMove(bool value)
+    {
+        canMove = value;
+    }
+
     // Update is called once per frame
     void Update()
     {
-        if(connectedNode != null)
+        if(connectedNode != null && canMove)
         {
             transform.position = new Vector3(
                 Mathf.Lerp(transform.position.x, connectedNode.position.x, Time.deltaTime * 30),

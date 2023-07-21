@@ -8,6 +8,8 @@ TagManager:
   - Collect
   - DepositMoney
   - Obstacle
+  - RankCube
+  - FinishBand
   layers:
   - Default
   - TransparentFX

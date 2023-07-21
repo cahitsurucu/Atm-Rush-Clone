@@ -6,6 +6,7 @@ using DG.Tweening;
 public class CollectManager : MonoBehaviour
 {
     public GameManager manager;
+    public FinalAtmManager finalManager;
 
     float dolar = 100f, gold = 1000f, diamond = 3000f;
     public float forceMagnitude = 0.05f;
@@ -13,6 +14,7 @@ public class CollectManager : MonoBehaviour
     private void Start()
     {
         manager = GameObject.Find("GameManager").GetComponent<GameManager>();
+        finalManager = GameObject.Find("FinalAtm").GetComponent<FinalAtmManager>();
         
     }
 
@@ -63,6 +65,19 @@ public class CollectManager : MonoBehaviour
                     Vector3 forceDirection = transform.position - other.transform.position;
                     rb.AddForce(forceDirection.normalized * forceMagnitude, ForceMode.Impulse);
                 }
+            }
+        }
+        else if(other.gameObject.CompareTag("FinishBand"))
+        {
+            if(this.gameObject.CompareTag("Collected"))
+            {
+                this.gameObject.transform.position = new Vector3(transform.position.x, .1f, transform.position.z);
+                this.gameObject.GetComponent<NodeMovement>().setMove(false);
+                finalManager.destroyMoney(this.gameObject);
+            }
+            else
+            {
+                this.gameObject.GetComponent<Movement>().setMove(false);
             }
         }
     }
