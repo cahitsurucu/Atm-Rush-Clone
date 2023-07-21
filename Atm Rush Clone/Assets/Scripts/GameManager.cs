@@ -7,8 +7,8 @@ public class GameManager : MonoBehaviour
 {
     public GameObject lastObject;
     public TMP_Text text;
-    public float money = 0;
-    public float depositMoney = 0;
+    [SerializeField] private float money = 0;
+    [SerializeField] private float depositMoney = 0;
     public TMP_Text[] texts;
 
     //float dolar = 100f, gold = 1000f, diamond = 3000f;

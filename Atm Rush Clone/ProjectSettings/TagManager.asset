@@ -10,6 +10,7 @@ TagManager:
   - Obstacle
   - RankCube
   - FinishBand
+  - FinalPlayer
   layers:
   - Default
   - TransparentFX

@@ -4,15 +4,20 @@ using UnityEngine;
 
 public class MiniGameManager : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+
+    public GameObject MiniGameBlocks;
+    public GameObject FinalPlayerSitting;
+    public GameObject Player;
+
+    public void gameFinished()
     {
-        
+        Invoke("startMiniGame", 1.5f);
     }
 
-    // Update is called once per frame
-    void Update()
+    private void startMiniGame()
     {
-        
+        Player.SetActive(false);
+        MiniGameBlocks.SetActive(true);
+        FinalPlayerSitting.SetActive(true);
     }
 }

@@ -7,15 +7,17 @@ public class CollectManager : MonoBehaviour
 {
     public GameManager manager;
     public FinalAtmManager finalManager;
+    public MiniGameManager miniManager;
 
-    float dolar = 100f, gold = 1000f, diamond = 3000f;
+    float dolar = 100f, gold = 400f, diamond = 800f;
     public float forceMagnitude = 0.05f;
 
     private void Start()
     {
         manager = GameObject.Find("GameManager").GetComponent<GameManager>();
         finalManager = GameObject.Find("FinalAtm").GetComponent<FinalAtmManager>();
-        
+        miniManager = GameObject.Find("MiniGameManager").GetComponent<MiniGameManager>();
+
     }
 
     private void OnTriggerEnter(Collider other)
@@ -78,6 +80,7 @@ public class CollectManager : MonoBehaviour
             else
             {
                 this.gameObject.GetComponent<Movement>().setMove(false);
+                miniManager.gameFinished();
             }
         }
     }
