@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -73,6 +74,11 @@ public class GameManager : MonoBehaviour
         {
             texts[i].text = depositMoney.ToString();
         }
+    }
+
+    public void loadLevel()
+    {
+        SceneManager.LoadScene(0);
     }
     
 }
