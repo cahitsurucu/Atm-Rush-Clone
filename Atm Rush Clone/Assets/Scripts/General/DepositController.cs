@@ -6,7 +6,7 @@ using TMPro;
 public class DepositController : MonoBehaviour
 {
     [SerializeField] private GameManager manager;
-    float dolar = 100f, gold = 1000f, diamond = 3000f;
+    float dolar = 100f, gold = 400f, diamond = 800f;
 
     private void Start()
     {

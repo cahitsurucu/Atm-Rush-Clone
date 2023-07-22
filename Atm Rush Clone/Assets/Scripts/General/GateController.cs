@@ -10,7 +10,7 @@ public class GateController : MonoBehaviour
 
     private GameManager manager;
 
-    float gold = 1000f, diamond = 3000f;
+    float gold = 400f, diamond = 800f;
 
     private void Start()
     {

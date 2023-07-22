@@ -11,8 +11,6 @@ public class GameManager : MonoBehaviour
     [SerializeField] private float depositMoney = 0;
     public TMP_Text[] texts;
 
-    //float dolar = 100f, gold = 1000f, diamond = 3000f;
-
     public void increaseDepositMoney(float value)
     {
         depositMoney += value;

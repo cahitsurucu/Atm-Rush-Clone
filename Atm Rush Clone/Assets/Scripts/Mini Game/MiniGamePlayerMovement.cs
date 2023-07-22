@@ -18,7 +18,7 @@ public class MiniGamePlayerMovement : MonoBehaviour
     private void MovePlayer()
     {
         float score = manager.getMoney();
-        float yPos = score / 600f; // HATAAAA -> Mini Game Collider Düzenlenecek, yPos Düzenlenecek
+        float yPos = score / 600f; // HATAAAA -> yPos Düzenlenecek
         yPos = Mathf.Clamp(yPos, 0.5f, 10.2f);
         transform.DOMoveY(yPos, 2f).SetDelay(1.5f).SetEase(Ease.Linear);
     }
