@@ -9,7 +9,7 @@ public class RankCubeMovement : MonoBehaviour
     {
         if (other.CompareTag("FinalPlayer"))
         {
-            transform.DOMoveZ(transform.position.z - 3f, 2f);
+            transform.DOMoveZ(transform.position.z - 1f, 2f);
         }
     }
 }
