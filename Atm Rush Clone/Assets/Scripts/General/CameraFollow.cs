@@ -19,7 +19,8 @@ public class CameraFollow : MonoBehaviour
     public void changeTarget(Transform newTarget)
     {
         target = newTarget;
-        offset = new Vector3(0, 1f, -1.9f);
+        this.transform.rotation = Quaternion.Euler(this.transform.rotation.x,-12f,this.transform.rotation.z);
+        offset = new Vector3(0.71f, 0.85f, -2.2f);
         followSpeed = 15;
     }
 }
