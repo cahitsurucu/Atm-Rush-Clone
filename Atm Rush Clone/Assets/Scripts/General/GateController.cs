@@ -19,7 +19,7 @@ public class GateController : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject.name.Contains("Money"))
+        if (other.gameObject.name.Contains("Money"))
         {
             other.gameObject.name = "Gold";
             other.gameObject.GetComponent<MeshFilter>().mesh = coinMesh[0];

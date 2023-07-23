@@ -56,7 +56,12 @@ public class CollectManager : MonoBehaviour
         {
             if(!this.gameObject.CompareTag("Player"))
             {
-                changeTag(this.gameObject); // ERRORRRRRRR
+                if(manager.getCanDestroy())
+                {
+                    manager.setCanDestroy(false);
+                    changeTag(this.gameObject); // ERRORRRRRRR
+                    manager.setCanDestroy(true);
+                } 
             }
             else
             {
@@ -64,6 +69,7 @@ public class CollectManager : MonoBehaviour
 
                 if (rb != null)
                 {
+                    removeStack();
                     Vector3 forceDirection = transform.position - other.transform.position;
                     rb.AddForce(forceDirection.normalized * forceMagnitude, ForceMode.Impulse);
                 }
@@ -85,7 +91,7 @@ public class CollectManager : MonoBehaviour
         }
     }
 
-    private void changeTag(GameObject destroy)
+    private void changeTag(GameObject destroy) // HATA
     {
         GameObject obj = manager.getLastObject();
         if(obj == destroy)
@@ -96,19 +102,25 @@ public class CollectManager : MonoBehaviour
         }
         else
         {
-            manager.setLastObject(destroy.GetComponent<NodeMovement>().connectedNode.gameObject);
-            while(obj != destroy)
+            if(destroy != null & destroy.GetComponent<NodeMovement>().connectedNode != null)
+                manager.setLastObject(destroy.GetComponent<NodeMovement>().connectedNode.gameObject);
+            decreaseMoney(destroy.name);
+            Destroy(destroy);
+            while (obj != null & obj.GetComponent<NodeMovement>() != null & obj != destroy)
             {
-                if(obj.GetComponent<NodeMovement>().connectedNode.gameObject != null)
+                if(obj.GetComponent<NodeMovement>().connectedNode != null)
                 {
                     GameObject temp = obj.GetComponent<NodeMovement>().connectedNode.gameObject;
                     obj.GetComponent<CollectManager>().decreaseMoney(obj.name);
                     obj.GetComponent<NodeMovement>().Throw(obj.transform.position, Random.Range(-0.5f, 0.5f));
                     obj = temp;
                 }
+                else
+                {
+                    break;
+                }
+
             }
-            decreaseMoney(this.gameObject.name);
-            Destroy(this.gameObject);
         }
 
     }
@@ -127,6 +139,23 @@ public class CollectManager : MonoBehaviour
         else
         {
             manager.decreaseMoney(diamond+gold+dolar);
+        }
+    }
+
+    private void removeStack()
+    {
+        GameObject obj = manager.getLastObject();
+        manager.setLastObject(this.gameObject);
+
+        if(obj != null && !obj.CompareTag("Player"))
+        {
+            while(!obj.CompareTag("Player"))
+            {
+                GameObject temp = obj.GetComponent<NodeMovement>().connectedNode.gameObject;
+                obj.GetComponent<CollectManager>().decreaseMoney(obj.name);
+                obj.GetComponent<NodeMovement>().Throw(obj.transform.position, Random.Range(-0.5f, 0.5f));
+                obj = temp;
+            }
         }
     }
 }

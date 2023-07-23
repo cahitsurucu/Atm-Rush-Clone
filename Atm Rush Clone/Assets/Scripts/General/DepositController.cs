@@ -15,21 +15,51 @@ public class DepositController : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject.name.Contains("Money"))
+        if(manager.getCanDestroy() && !other.gameObject.CompareTag("Player"))
         {
-            manager.increaseDepositMoney(dolar);
-            Destroy(other.gameObject);
+            manager.setCanDestroy(false);
+            changeLastObject(other.gameObject);
+            if (other.gameObject.name.Contains("Money"))
+            {
+                manager.increaseDepositMoney(dolar);
+                Destroy(other.gameObject);
+            }
+            else if (other.gameObject.name.Contains("Gold"))
+            {
+                manager.increaseDepositMoney(gold);
+                Destroy(other.gameObject);
+            }
+            else if (other.gameObject.name.Contains("Diamond"))
+            {
+                manager.increaseDepositMoney(diamond);
+                Destroy(other.gameObject);
+            }
+            manager.setCanDestroy(true);
         }
-        else if(other.gameObject.name.Contains("Gold"))
+    }
+
+    private void changeLastObject(GameObject other) // HATA
+    {
+        GameObject obj = manager.getLastObject();
+        if (obj == other)
         {
-            manager.increaseDepositMoney(gold);
-            Destroy(other.gameObject);
+            manager.setLastObject(other.GetComponent<NodeMovement>().connectedNode.gameObject);
         }
-        else if(other.gameObject.name.Contains("Diamond"))
+        else
         {
-            manager.increaseDepositMoney(diamond);
-            Destroy(other.gameObject);
+            if (other != null & other.GetComponent<NodeMovement>().connectedNode != null)
+                manager.setLastObject(other.GetComponent<NodeMovement>().connectedNode.gameObject);
+            while (obj != null & obj.GetComponent<NodeMovement>() != null & obj != other)
+            {
+                if (obj.GetComponent<NodeMovement>().connectedNode.gameObject != null)
+                {
+                    GameObject temp = obj.GetComponent<NodeMovement>().connectedNode.gameObject;
+                    obj.GetComponent<NodeMovement>().Throw(obj.transform.position, Random.Range(-0.5f, 0.5f));
+                    obj = temp;
+                }
+            }
         }
+        manager.setCanDestroy(true);
     }
 
 }

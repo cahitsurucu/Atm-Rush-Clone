@@ -11,6 +11,17 @@ public class GameManager : MonoBehaviour
     [SerializeField] private float money = 0;
     [SerializeField] private float depositMoney = 0;
     public TMP_Text[] texts;
+    public bool canDestroy = true;
+
+    public bool getCanDestroy()
+    {
+        return canDestroy;
+    }
+
+    public void setCanDestroy(bool value)
+    {
+        canDestroy = value;
+    }
 
     public void increaseDepositMoney(float value)
     {
